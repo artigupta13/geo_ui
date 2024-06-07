@@ -1,5 +1,5 @@
 // src/components/SearchForm.js
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Form,
   Button,
@@ -19,48 +19,51 @@ const SearchForm = ({ setResults }) => {
   });
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
-    console.log(".......", name);
-    setSearchFields({ ...searchFields, [name]: value });
-  };
+    setSearchFields(prevFields => ({ ...prevFields, [name]: value }));
+  }, []);
 
   // Function to clear search input
-  const handleClearField = (field) => {
-    setSearchFields({ ...searchFields, [field]: "" });
-    console.log("this is running");
-  };
+  const handleClearField = useCallback((field) => {
+    setSearchFields(prevFields => ({ ...prevFields, [field]: '' }));
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
-    setError("");
-    try {
-      const lat = searchFields.latitude ? parseFloat(searchFields.latitude) : 0;
-      const lon = searchFields.longitude
-        ? parseFloat(searchFields.longitude)
-        : 0;
-      if (isNaN(lat) || lat < -90 || lat > 90) {
-        setError("Please enter a valid latitude between -90 and 90 degrees.");
-        return;
-      }
+    setError('');
 
-      if (isNaN(lon) || lon < -180 || lon > 180) {
-        setError(
-          "Please enter a valid longitude between -180 and 180 degrees."
-        );
-        return;
-      }
+    const lat = searchFields.latitude ? parseFloat(searchFields.latitude) : 0;
+    const lon = searchFields.longitude ? parseFloat(searchFields.longitude) : 0;
+
+    if (isNaN(lat) || lat < -90 || lat > 90) {
+      setError('Please enter a valid latitude between -90 and 90 degrees.');
+      return;
+    }
+
+    if (isNaN(lon) || lon < -180 || lon > 180) {
+      setError('Please enter a valid longitude between -180 and 180 degrees.');
+      return;
+    }
+
+    try {
       const response = await search(searchFields);
       setResults(response);
     } catch (error) {
-      console.error("Error fetching search results", error);
+      console.error('Error fetching search results', error);
     }
-  };
+  }, [searchFields, setResults]);
 
   return (
     <Container className="mt-5">
       <Form onSubmit={handleSubmit}>
         {error && <Alert variant="danger">{error}</Alert>}
+        <Row className="align-items-center my-3">
+          <Col xs={4}></Col>
+          <Col xs={4} className="text-center">
+            <h1 className="app-title">Geo Search</h1>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Form.Group controlId="name">
@@ -73,6 +76,7 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
+                className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("name")}
                 >
@@ -92,8 +96,10 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
+                className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("latitude")}
+                  
                 >
                   &times;
                 </Button>
@@ -111,6 +117,7 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
+                className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("longitude")}
                 >
@@ -120,12 +127,12 @@ const SearchForm = ({ setResults }) => {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col>
+        <Row className="align-items-center my-3">
+          <Col xs={12} className="text-center">
             {" "}
-            <Button variant="primary" type="submit" className="me-2">
+            <button type="submit" className="me-2 submit-button">
               Search
-            </Button>
+            </button>
           </Col>
         </Row>
       </Form>

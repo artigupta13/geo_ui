@@ -13,19 +13,58 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-bottom: 1px solid #dee2e6;
+
 }
 
-.App-link {
-  color: #61dafb;
+.app-title {
+  margin: 0;
+  font-size: 40px;
+  color:  #B8D326;
+}
+
+
+.submit-button {
+  background-color: #D6A2E8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.submit-button:hover {
+  background-color: #B8D326;
+}
+
+.alert-danger {
+  border-radius: 20px;
+}
+
+.thead-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.thead-dark th {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2em;
+  color: #6c757d;
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +75,45 @@
     transform: rotate(360deg);
   }
 }
+
+/* Navigation.css */
+
+.navbar {
+  display: flex;
+  justify-content: center; /* Horizontally center the links */
+  background-color: #D6A2E8  ; /* Example background color */
+  padding: 10px;
+}
+
+.nav-links {
+  display: flex; /* Display links inline */
+}
+
+.nav-links a {
+  color: #fff; /* Set link color to white */
+  text-decoration: none; /* Remove underline */
+  margin: 0 10px; /* Add margin between links */
+}
+
+.upload-instructions {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.upload-instructions .p1 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.upload-instructions .p2 {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+}
+
+

@@ -10,7 +10,7 @@ const SearchResult = ({ results }) => {
     <Container className="mt-3">
       {results?.length > 0 ? (
         <Table striped bordered hover>
-          <thead>
+          <thead className="thead-dark">
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -32,7 +32,7 @@ const SearchResult = ({ results }) => {
           </tbody>
         </Table>
       ) : (
-        <p>No results found</p>
+        <p className="no-results">No results found</p>
       )}
     </Container>
   );
