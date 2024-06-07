@@ -39,6 +39,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### 4. build the app
  ```
+  npm test
+  ```
+
+### 5. build the app
+ ```
   npm run build
   ```
 
