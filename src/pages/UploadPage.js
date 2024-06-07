@@ -9,7 +9,7 @@ const UploadPage = () => {
       <Row className="justify-content-md-center">
         <Col md={8}>
           <FileUpload setUploadSuccess={setUploadSuccess} />
-          {uploadSuccess && <p>Data migration started</p>}
+          {uploadSuccess && <p className="message">Data migration started</p>}
         </Col>
       </Row>
     </Container>

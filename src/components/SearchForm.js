@@ -71,6 +71,7 @@ const SearchForm = ({ setResults }) => {
                 <Form.Control
                   type="text"
                   placeholder="Name"
+                  className="custom-textbox"
                   name="name"
                   value={searchFields.name}
                   onChange={handleChange}
@@ -91,6 +92,7 @@ const SearchForm = ({ setResults }) => {
                 <Form.Control
                   type="text"
                   placeholder="latitude"
+                  className="custom-textbox"
                   name="latitude"
                   value={searchFields.latitude}
                   onChange={handleChange}
@@ -112,6 +114,7 @@ const SearchForm = ({ setResults }) => {
                 <Form.Control
                   type="text"
                   placeholder="longitude"
+                  className="custom-textbox"
                   name="longitude"
                   value={searchFields.longitude}
                   onChange={handleChange}

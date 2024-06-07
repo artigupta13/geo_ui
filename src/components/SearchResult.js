@@ -32,7 +32,7 @@ const SearchResult = ({ results }) => {
           </tbody>
         </Table>
       ) : (
-        <p className="no-results">No results found</p>
+        <p className="message">No results found</p>
       )}
     </Container>
   );

@@ -61,7 +61,7 @@
   background-color: #e9ecef;
 }
 
-.no-results {
+.message {
   text-align: center;
   font-size: 1.2em;
   color: #6c757d;
@@ -114,6 +114,21 @@
   margin: 0;
   font-size: 14px;
   color: black;
+}
+
+.custom-textbox {
+  background-color: white !important;
+  border-color:  #D6A2E8 !important; /* Optional: To match the default border color */
+  box-shadow: none !important; /* Remove the shadow */
+  outline: none !important; /* Remove the default outline */
+}
+
+
+.custom-textbox:focus {
+  background-color: white !important;
+  border-color:  #D6A2E8 !important; /* Optional: To match the default border color */
+  box-shadow: none !important; /* Remove the shadow */
+  outline: none !important; /* Remove the default outline */
 }
 
 
