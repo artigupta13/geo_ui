@@ -1,0 +1,17 @@
+{
+  "roots": ["<rootDir>/src"],
+  "moduleFileExtensions": ["js", "jsx", "json", "node"],
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
+  "testEnvironment": "jsdom",
+  "testMatch": [
+    "**/__tests__/**/*.js?(x)",
+    "**/?(*.)+(spec|test).js?(x)"
+  ],
+  "transform": {
+    "^.+\\.(js|jsx)$": "babel-jest"
+  },
+  "verbose": true,
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"]
+}
