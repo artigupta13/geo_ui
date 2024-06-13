@@ -6,11 +6,15 @@ import SearchPage from "./pages/SearchPage";
 import UploadPage from "./pages/UploadPage";
 import "./App.css";
 
+import HomePage from "./pages/HomePage";
+
 const App = () => {
+  
   return (
     <BrowserRouter>
       <Navigation />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path={ROUTE_MIGRATE} element={<UploadPage />} />
         <Route path={ROUTE_SEARCH} element={<SearchPage />} />
       </Routes>

@@ -5,7 +5,6 @@ import { memo } from "react";
 
 
 const SearchResult = ({ results }) => {
-  console.log("I am running searchresult");
   return (
     <Container className="mt-3">
       {results?.length > 0 ? (
