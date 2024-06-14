@@ -20,9 +20,19 @@ const SearchResult = ({ results, loading = false }) => {
             </tr>
           </thead>
           <tbody>
-            {results?.map((result, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
+            {results.suggestions?.map((result, index) => (
+              <tr
+                key={
+                  results.currentPage === 1
+                    ? index + 1
+                    : (results.currentPage - 1) * 10 + index + 1
+                }
+              >
+                <td>
+                  {results.currentPage === 1
+                    ? index + 1
+                    : (results.currentPage - 1) * 10 + index + 1}
+                </td>
                 <td>{result.name}</td>
                 <td>{result.latitude}</td>
                 <td>{result.longitude}</td>

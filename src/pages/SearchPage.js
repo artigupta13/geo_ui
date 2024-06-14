@@ -17,7 +17,7 @@ const SearchPage = () => {
     try {
       setLoading(true);
       const response = await search({ ...searchFields, page });
-      setResults(response.data.suggestions);
+      setResults(response.data);
       setCurrentPage(response.data.currentPage);
       setTotalPages(response.data.totalPages);
       setSearchFields(searchFields);
