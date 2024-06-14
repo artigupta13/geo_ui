@@ -13,7 +13,7 @@ const HomePage = () => {
         </Row>
         <Row className="justify-content-center">
         <Col className="text-center">
-          <Image src="geo.png" fluid />
+          <Image className="App-logo" src="geo.png" fluid />
         </Col>
       </Row>
     </Container>

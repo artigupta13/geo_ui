@@ -1,8 +1,7 @@
 // src/components/SearchResults.js
-import React from 'react';
-import { Table, Container } from 'react-bootstrap';
+import React from "react";
+import { Table, Container } from "react-bootstrap";
 import { memo } from "react";
-
 
 const SearchResult = ({ results }) => {
   return (

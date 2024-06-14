@@ -8,6 +8,7 @@ const Navigation = () => {
   return (
     <div className="navbar">
       <div className="nav-links">
+      <Link to="/">Home</Link>
         <Link to={ROUTE_MIGRATE}>Migrate Data</Link>
         <Link to={ROUTE_SEARCH}>Search Data</Link>
       </div>

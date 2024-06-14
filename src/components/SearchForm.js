@@ -1,5 +1,5 @@
 // src/components/SearchForm.js
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   Form,
   Button,
@@ -18,41 +18,59 @@ const SearchForm = ({ setResults }) => {
     longitude: "",
   });
   const [error, setError] = useState("");
+  const prevSearchFields = useRef(searchFields);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
-    setSearchFields(prevFields => ({ ...prevFields, [name]: value }));
+    setSearchFields((prevFields) => ({ ...prevFields, [name]: value }));
   }, []);
 
   // Function to clear search input
   const handleClearField = useCallback((field) => {
-    setSearchFields(prevFields => ({ ...prevFields, [field]: '' }));
+    setSearchFields((prevFields) => ({ ...prevFields, [field]: "" }));
   }, []);
 
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    setError('');
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setError("");
 
-    const lat = searchFields.latitude ? parseFloat(searchFields.latitude) : 0;
-    const lon = searchFields.longitude ? parseFloat(searchFields.longitude) : 0;
+      const lat = searchFields.latitude ? parseFloat(searchFields.latitude) : 0;
+      const lon = searchFields.longitude
+        ? parseFloat(searchFields.longitude)
+        : 0;
 
-    if (isNaN(lat) || lat < -90 || lat > 90) {
-      setError('Please enter a valid latitude between -90 and 90 degrees.');
-      return;
-    }
+      if (isNaN(lat) || lat < -90 || lat > 90) {
+        setError("Please enter a valid latitude between -90 and 90 degrees.");
+        return;
+      }
 
-    if (isNaN(lon) || lon < -180 || lon > 180) {
-      setError('Please enter a valid longitude between -180 and 180 degrees.');
-      return;
-    }
+      if (isNaN(lon) || lon < -180 || lon > 180) {
+        setError(
+          "Please enter a valid longitude between -180 and 180 degrees."
+        );
+        return;
+      }
 
-    try {
-      const response = await search(searchFields);
-      setResults(response);
-    } catch (error) {
-      console.error('Error fetching search results', error);
-    }
-  }, [searchFields, setResults]);
+      // check if the current search fields are the same as the previous search field
+      if (
+        searchFields.name === prevSearchFields.current.name &&
+        searchFields.latitude === prevSearchFields.current.latitude &&
+        searchFields.longitude === prevSearchFields.current.longitude
+      ) {
+        return; // skip the search if it's the same as the previous one
+      }
+
+      try {
+        const response = await search(searchFields);
+        setResults(response);
+        prevSearchFields.current = { ...searchFields };
+      } catch (error) {
+        console.error("Error fetching search results", error);
+      }
+    },
+    [searchFields, setResults]
+  );
 
   return (
     <Container className="mt-5">
@@ -77,7 +95,7 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
-                className="clear-button"
+                  className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("name")}
                 >
@@ -98,10 +116,9 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
-                className="clear-button"
+                  className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("latitude")}
-                  
                 >
                   &times;
                 </Button>
@@ -120,7 +137,7 @@ const SearchForm = ({ setResults }) => {
                   onChange={handleChange}
                 />
                 <Button
-                className="clear-button"
+                  className="clear-button"
                   variant="outline-secondary"
                   onClick={() => handleClearField("longitude")}
                 >
