@@ -3,10 +3,12 @@ import React from "react";
 import { Table, Container } from "react-bootstrap";
 import { memo } from "react";
 
-const SearchResult = ({ results }) => {
+const SearchResult = ({ results, loading = false }) => {
   return (
     <Container className="mt-3">
-      {results?.length > 0 ? (
+      {!results && loading ? (
+        <p>loading</p>
+      ) : (
         <Table striped bordered hover>
           <thead className="thead-dark">
             <tr>
@@ -18,7 +20,7 @@ const SearchResult = ({ results }) => {
             </tr>
           </thead>
           <tbody>
-            {results.map((result, index) => (
+            {results?.map((result, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{result.name}</td>
@@ -29,8 +31,6 @@ const SearchResult = ({ results }) => {
             ))}
           </tbody>
         </Table>
-      ) : (
-        <p className="message">No results found</p>
       )}
     </Container>
   );

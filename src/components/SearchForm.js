@@ -9,9 +9,8 @@ import {
   InputGroup,
   Alert,
 } from "react-bootstrap";
-import search from "../services/searchService";
 
-const SearchForm = ({ setResults }) => {
+const SearchForm = ({ fetchResults }) => {
   const [searchFields, setSearchFields] = useState({
     name: "",
     latitude: "",
@@ -62,14 +61,13 @@ const SearchForm = ({ setResults }) => {
       }
 
       try {
-        const response = await search(searchFields);
-        setResults(response);
+        fetchResults(searchFields);
         prevSearchFields.current = { ...searchFields };
       } catch (error) {
         console.error("Error fetching search results", error);
       }
     },
-    [searchFields, setResults]
+    [searchFields, fetchResults]
   );
 
   return (

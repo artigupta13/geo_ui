@@ -6,7 +6,7 @@ const search = async (searchTerm) => {
     const response = await axios.get(`/api/search`, {
       params: { ...searchTerm },
     });
-    return response?.data?.suggestions;
+    return response;
   } catch (error) {
     console.error('Error fetching search results:', error);
     return [];
